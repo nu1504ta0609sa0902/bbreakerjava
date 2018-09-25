@@ -8,7 +8,7 @@ import javax.swing.*;
 public class BBMain {
     public final static int WIDTH = 640, HEIGHT = 480;
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws InterruptedException {
 
         //Create a frame for our game
         JFrame theFrame = new JFrame("Brick Breaker");
