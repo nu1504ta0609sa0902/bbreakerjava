@@ -1,4 +1,6 @@
-package main;
+package main.entities;
+
+import main.BBMain;
 
 import java.awt.*;
 

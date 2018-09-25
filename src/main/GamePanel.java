@@ -1,5 +1,9 @@
 package main;
 
+import main.entities.Ball;
+import main.entities.Paddle;
+import main.listeners.PaddleMouseListener;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,6 +13,9 @@ import java.awt.image.BufferedImage;
  */
 public class GamePanel extends JPanel{
 
+    //Mouse motion lisner
+    PaddleMouseListener paddleMouseListener;
+
     // Panels
     boolean running;
     BufferedImage image;
@@ -16,6 +23,7 @@ public class GamePanel extends JPanel{
 
     // Entity
     Ball theBall;
+    Paddle thePaddle;
 
     public GamePanel(){
         init();
@@ -27,6 +35,11 @@ public class GamePanel extends JPanel{
         g = (Graphics2D) image.getGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         theBall = new Ball();
+        thePaddle = new Paddle();
+
+        //Add listener
+        paddleMouseListener = new PaddleMouseListener(thePaddle);
+        addMouseMotionListener(paddleMouseListener);
     }
 
     public void playGame() throws InterruptedException {
@@ -46,6 +59,7 @@ public class GamePanel extends JPanel{
 
     public void updateStates() {
         theBall.update();
+        thePaddle.update();
     }
 
     public void draw() {
@@ -53,6 +67,7 @@ public class GamePanel extends JPanel{
         g.setColor(Color.WHITE);
         g.fillRect(0,0, BBMain.WIDTH, BBMain.HEIGHT);
         theBall.draw(g);
+        thePaddle.draw(g);
     }
 
     @Override
