@@ -9,8 +9,8 @@ import java.awt.*;
  */
 public class Paddle {
 
-    //Paddle only moves in the x axis
-    private int x;
+    //Paddle only moves in the xPos axis
+    private double xPos;
     private int width;
     private int height;
 
@@ -19,7 +19,7 @@ public class Paddle {
     public Paddle() {
         width = 100;
         height = 20;
-        x = BBMain.WIDTH/2 - width/2;
+        xPos = BBMain.WIDTH/2 - width/2;
     }
 
     public void update(){
@@ -28,10 +28,14 @@ public class Paddle {
 
     public void draw(Graphics2D g){
         g.setColor(Color.DARK_GRAY);
-        g.fillRect(x, YPOS, width, height);
+        g.fillRect((int) xPos, YPOS, width, height);
     }
 
     public void mousePosition(int xPos){
-        x = xPos;
+        this.xPos = xPos;
+    }
+
+    public Rectangle getRectangle(){
+        return new Rectangle((int)xPos, YPOS, width, height);
     }
 }

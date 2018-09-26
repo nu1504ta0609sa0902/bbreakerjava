@@ -14,6 +14,7 @@ public class BBMain {
         JFrame theFrame = new JFrame("Brick Breaker");
         GamePanel thePanel = new GamePanel();
         Thread theThread = new Thread(thePanel);
+        theThread.start();
 
         theFrame.setSize(WIDTH, HEIGHT);
         theFrame.setResizable(false);
@@ -25,8 +26,6 @@ public class BBMain {
         //Centrallise the location
         theFrame.setLocationRelativeTo(null);
         theFrame.setVisible(true);
-
-        theThread.start();
 
     }
 }

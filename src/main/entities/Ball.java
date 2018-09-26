@@ -9,8 +9,8 @@ import java.awt.*;
  */
 public class Ball {
 
-    public int xPos;
-    public int yPos;
+    public double xPos;
+    public double yPos;
     public int xDir;
     public int yDir;
 
@@ -57,6 +57,10 @@ public class Ball {
     public void draw(Graphics2D g){
         g.setColor(Color.CYAN);
         g.setStroke(new BasicStroke(3));
-        g.drawOval(xPos, yPos, ballSizeWidth, ballSizeHeight);
+        g.drawOval((int)xPos, (int)yPos, ballSizeWidth, ballSizeHeight);
+    }
+
+    public Rectangle getRectangle(){
+        return new Rectangle((int)xPos, (int)yPos, ballSizeWidth, ballSizeHeight);
     }
 }

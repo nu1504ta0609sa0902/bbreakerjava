@@ -58,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
 
             //Add a delay
             try {
-                Thread.sleep(5);
+                Thread.sleep(15);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -66,9 +66,16 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void updateStates() {
+        collisionBallToPaddle();
         theBall.update();
-        thePaddle.update();
-        theMap.update();
+    }
+
+    private void collisionBallToPaddle() {
+        Rectangle theBallRectangle = theBall.getRectangle();
+        Rectangle thePaddleRectangle = thePaddle.getRectangle();
+        if(theBallRectangle.intersects(thePaddleRectangle)){
+            theBall.yDir = -theBall.yDir;
+        }
     }
 
     public void draw() {
