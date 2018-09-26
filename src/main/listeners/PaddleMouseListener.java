@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
  */
 public class PaddleMouseListener implements MouseMotionListener {
 
+    public static int mouseX;
     Paddle paddle;
 
     public PaddleMouseListener(Paddle paddle) {
@@ -24,6 +25,7 @@ public class PaddleMouseListener implements MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        mouseX = e.getX();
         //We want the paddle to move when our mouse moves
         paddle.mousePosition(e.getX());
     }

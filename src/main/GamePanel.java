@@ -61,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable{
 
             //Add a delay
             try {
-                Thread.sleep(12);
+                Thread.sleep(15);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -80,6 +80,9 @@ public class GamePanel extends JPanel implements Runnable{
         Rectangle thePaddleRectangle = thePaddle.getRectangle();
         if(theBallRectangle.intersects(thePaddleRectangle)){
             theBall.yDir = -theBall.yDir;
+
+            //Change direction of ball in X-axis
+            changeBallsXDirection();
         }
 
         //Ball to Brick collision
@@ -92,18 +95,26 @@ public class GamePanel extends JPanel implements Runnable{
                     if (theBallRectangle.intersects(theBrickRectangle)) {
                         bricks[row][col] = 0;
                         theBall.yDir = -theBall.yDir;
-                        theHUD.score += 50;
-
-                        //Add a delay
-                        try {
-                            Thread.sleep(12);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        theHUD.totalScore += theHUD.scorePerBoard;
                         break A;
                     }
                 }
             }
+        }
+    }
+
+    private void changeBallsXDirection() {
+        double bXPos = theBall.getxPos();
+        int mouseX = PaddleMouseListener.mouseX;
+        int pWidth = thePaddle.getWidth();
+
+        if(bXPos < mouseX + pWidth /4){
+            theBall.setxDir(theBall.getxDir() - 0.25);
+        }
+
+        if(bXPos < mouseX + pWidth
+                && bXPos > mouseX + pWidth /4){
+            theBall.setxDir(theBall.getxDir() + 0.25);
         }
     }
 

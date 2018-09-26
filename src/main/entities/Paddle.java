@@ -31,11 +31,39 @@ public class Paddle {
         g.fillRect((int) xPos, YPOS, width, height);
     }
 
-    public void mousePosition(int xPos){
-        this.xPos = xPos;
+    public void mousePosition(int mousePosition){
+        this.xPos = mousePosition;
+        //Prevent paddle from going off the canvas
+        if(xPos > BBMain.WIDTH - width - 5){
+            this.xPos = BBMain.WIDTH - width - 5;
+        }
     }
 
     public Rectangle getRectangle(){
         return new Rectangle((int)xPos, YPOS, width, height);
+    }
+
+    public double getxPos() {
+        return xPos;
+    }
+
+    public void setxPos(double xPos) {
+        this.xPos = xPos;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
     }
 }

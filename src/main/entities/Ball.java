@@ -11,8 +11,8 @@ public class Ball {
 
     public double xPos;
     public double yPos;
-    public int xDir;
-    public int yDir;
+    public double xDir;
+    public double yDir;
 
     public int ballSizeWidth = 15;
     public int ballSizeHeight = 15;
@@ -63,5 +63,37 @@ public class Ball {
 
     public Rectangle getRectangle(){
         return new Rectangle((int)xPos, (int)yPos, ballSizeWidth, ballSizeHeight);
+    }
+
+    public double getxPos() {
+        return xPos;
+    }
+
+    public void setxPos(double xPos) {
+        this.xPos = xPos;
+    }
+
+    public double getyDir() {
+        return yDir;
+    }
+
+    public void setyDir(int yDir) {
+        this.yDir = yDir;
+    }
+
+    public double getxDir() {
+        return xDir;
+    }
+
+    public void setxDir(double xDir) {
+        this.xDir = xDir;
+    }
+
+    public double getyPos() {
+        return yPos;
+    }
+
+    public void setyPos(double yPos) {
+        this.yPos = yPos;
     }
 }
