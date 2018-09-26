@@ -8,11 +8,12 @@ import javax.swing.*;
 public class BBMain {
     public final static int WIDTH = 640, HEIGHT = 480;
 
-    public static void main(String args[]) throws InterruptedException {
+    public static void main(String args[]){
 
         //Create a frame for our game
         JFrame theFrame = new JFrame("Brick Breaker");
         GamePanel thePanel = new GamePanel();
+        Thread theThread = new Thread(thePanel);
 
         theFrame.setSize(WIDTH, HEIGHT);
         theFrame.setResizable(false);
@@ -25,7 +26,7 @@ public class BBMain {
         theFrame.setLocationRelativeTo(null);
         theFrame.setVisible(true);
 
-        thePanel.playGame();
+        theThread.start();
 
     }
 }

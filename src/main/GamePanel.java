@@ -1,6 +1,7 @@
 package main;
 
 import main.entities.Ball;
+import main.entities.BrickMap;
 import main.entities.Paddle;
 import main.listeners.PaddleMouseListener;
 
@@ -11,7 +12,7 @@ import java.awt.image.BufferedImage;
 /**
  * Created by tayyibah on 24/09/2018.
  */
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel implements Runnable{
 
     //Mouse motion lisner
     PaddleMouseListener paddleMouseListener;
@@ -24,6 +25,7 @@ public class GamePanel extends JPanel{
     // Entity
     Ball theBall;
     Paddle thePaddle;
+    BrickMap theMap;
 
     public GamePanel(){
         init();
@@ -36,13 +38,15 @@ public class GamePanel extends JPanel{
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         theBall = new Ball();
         thePaddle = new Paddle();
+        theMap = new BrickMap(5, 5);
 
         //Add listener
         paddleMouseListener = new PaddleMouseListener(thePaddle);
         addMouseMotionListener(paddleMouseListener);
     }
 
-    public void playGame() throws InterruptedException {
+    @Override
+    public void run() {
         //Game Loop
         while (running){
             //Update
@@ -53,13 +57,18 @@ public class GamePanel extends JPanel{
             repaint();
 
             //Add a delay
-            Thread.sleep(5);
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
     public void updateStates() {
         theBall.update();
         thePaddle.update();
+        theMap.update();
     }
 
     public void draw() {
@@ -68,6 +77,7 @@ public class GamePanel extends JPanel{
         g.fillRect(0,0, BBMain.WIDTH, BBMain.HEIGHT);
         theBall.draw(g);
         thePaddle.draw(g);
+        theMap.draw(g);
     }
 
     @Override
