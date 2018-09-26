@@ -2,6 +2,7 @@ package main;
 
 import main.entities.Ball;
 import main.entities.BrickMap;
+import main.entities.HUD;
 import main.entities.Paddle;
 import main.listeners.PaddleMouseListener;
 
@@ -26,6 +27,7 @@ public class GamePanel extends JPanel implements Runnable{
     Ball theBall;
     Paddle thePaddle;
     BrickMap brickMap;
+    HUD theHUD;
 
     public GamePanel(){
         init();
@@ -38,7 +40,8 @@ public class GamePanel extends JPanel implements Runnable{
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         theBall = new Ball();
         thePaddle = new Paddle();
-        brickMap = new BrickMap(5, 5);
+        brickMap = new BrickMap(6, 10);
+        theHUD = new HUD();
 
         //Add listener
         paddleMouseListener = new PaddleMouseListener(thePaddle);
@@ -58,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable{
 
             //Add a delay
             try {
-                Thread.sleep(15);
+                Thread.sleep(12);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -89,7 +92,14 @@ public class GamePanel extends JPanel implements Runnable{
                     if (theBallRectangle.intersects(theBrickRectangle)) {
                         bricks[row][col] = 0;
                         theBall.yDir = -theBall.yDir;
-                        //theBall.xDir = -theBall.xDir;
+                        theHUD.score += 50;
+
+                        //Add a delay
+                        try {
+                            Thread.sleep(12);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         break A;
                     }
                 }
@@ -104,6 +114,7 @@ public class GamePanel extends JPanel implements Runnable{
         theBall.draw(g);
         thePaddle.draw(g);
         brickMap.draw(g);
+        theHUD.draw(g);
     }
 
     @Override
