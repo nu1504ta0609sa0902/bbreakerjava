@@ -19,8 +19,8 @@ public class BrickMap {
         initBrickMap(row,col);
 
         //set brick width and height
-        brickWidth = (BBMain.WIDTH - (2 * HOR_PAD)) / col;
-        brickHeight = (BBMain.HEIGHT / 2 - VERT_PAD) / row;
+        brickWidth = (BBMain.WIDTH - 2 * HOR_PAD) / col;
+        brickHeight = ((BBMain.HEIGHT / 2) - VERT_PAD*2) / row;
     }
 
     /**
@@ -47,11 +47,12 @@ public class BrickMap {
                 //Only redraw if its a visible block
                 if(brickMap[row][col] == 1) {
                     g.setColor(Color.DARK_GRAY);
-                    g.fillRect(col * brickWidth + HOR_PAD, row * brickHeight + VERT_PAD, brickWidth, brickWidth);
+                    g.fillRect(col * brickWidth + HOR_PAD, row * brickHeight + VERT_PAD, brickWidth, brickHeight);
 
                     g.setStroke(new BasicStroke(3));
+
                     g.setColor(Color.BLUE);
-                    g.drawRect(col * brickWidth + HOR_PAD, row * brickHeight + VERT_PAD, brickWidth, brickWidth);
+                    g.drawRect(col * brickWidth + HOR_PAD, row * brickHeight + VERT_PAD, brickWidth, brickHeight);
                 }
             }
         }

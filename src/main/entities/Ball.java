@@ -14,12 +14,12 @@ public class Ball {
     public int xDir;
     public int yDir;
 
-    public int ballSizeWidth = 30;
-    public int ballSizeHeight = 30;
+    public int ballSizeWidth = 15;
+    public int ballSizeHeight = 15;
 
     public Ball() {
-        xPos = 200;
-        yPos = 200;
+        xPos = BBMain.WIDTH/2;
+        yPos = BBMain.HEIGHT * 0.6;
         xDir = 1;
         yDir = 3;
     }
@@ -56,8 +56,9 @@ public class Ball {
      */
     public void draw(Graphics2D g){
         g.setColor(Color.CYAN);
-        g.setStroke(new BasicStroke(3));
-        g.drawOval((int)xPos, (int)yPos, ballSizeWidth, ballSizeHeight);
+        g.setStroke(new BasicStroke(2));
+        //g.drawOval((int)xPos, (int)yPos, ballSizeWidth, ballSizeHeight);
+        g.fillOval((int)xPos, (int)yPos, ballSizeWidth, ballSizeHeight);
     }
 
     public Rectangle getRectangle(){
