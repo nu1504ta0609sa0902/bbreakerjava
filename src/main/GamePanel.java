@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable{
     // Entity
     Ball theBall;
     Paddle thePaddle;
-    BrickMap theMap;
+    BrickMap brickMap;
 
     public GamePanel(){
         init();
@@ -38,7 +38,7 @@ public class GamePanel extends JPanel implements Runnable{
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         theBall = new Ball();
         thePaddle = new Paddle();
-        theMap = new BrickMap(5, 5);
+        brickMap = new BrickMap(5, 5);
 
         //Add listener
         paddleMouseListener = new PaddleMouseListener(thePaddle);
@@ -71,10 +71,29 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     private void collisionBallToPaddle() {
+
+        //Ball to paddle collision
         Rectangle theBallRectangle = theBall.getRectangle();
         Rectangle thePaddleRectangle = thePaddle.getRectangle();
         if(theBallRectangle.intersects(thePaddleRectangle)){
             theBall.yDir = -theBall.yDir;
+        }
+
+        //Ball to Brick collision
+        int [][] bricks = brickMap.getBrickMap();
+        A: for(int row = 0; row < bricks.length; row++) {
+            for (int col = 0; col < bricks[0].length; col++) {
+                //Only if block is visible
+                if(bricks[row][col] == 1) {
+                    Rectangle theBrickRectangle = brickMap.getBrickRectangle(row, col);
+                    if (theBallRectangle.intersects(theBrickRectangle)) {
+                        bricks[row][col] = 0;
+                        theBall.yDir = -theBall.yDir;
+                        //theBall.xDir = -theBall.xDir;
+                        break A;
+                    }
+                }
+            }
         }
     }
 
@@ -84,7 +103,7 @@ public class GamePanel extends JPanel implements Runnable{
         g.fillRect(0,0, BBMain.WIDTH, BBMain.HEIGHT);
         theBall.draw(g);
         thePaddle.draw(g);
-        theMap.draw(g);
+        brickMap.draw(g);
     }
 
     @Override

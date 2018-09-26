@@ -44,17 +44,34 @@ public class BrickMap {
     public void draw(Graphics2D g){
         for(int row = 0; row < brickMap.length; row++){
             for(int col= 0; col < brickMap[0].length; col++){
+                //Only redraw if its a visible block
+                if(brickMap[row][col] == 1) {
+                    g.setColor(Color.DARK_GRAY);
+                    g.fillRect(col * brickWidth + HOR_PAD, row * brickHeight + VERT_PAD, brickWidth, brickWidth);
 
-                g.setColor(Color.DARK_GRAY);
-                g.fillRect(col * brickWidth + HOR_PAD, row * brickHeight + VERT_PAD, brickWidth, brickWidth);
-
-                g.setStroke(new BasicStroke(3));
-                g.setColor(Color.BLUE);
-                g.drawRect(col * brickWidth + HOR_PAD, row * brickHeight + VERT_PAD, brickWidth, brickWidth);
+                    g.setStroke(new BasicStroke(3));
+                    g.setColor(Color.BLUE);
+                    g.drawRect(col * brickWidth + HOR_PAD, row * brickHeight + VERT_PAD, brickWidth, brickWidth);
+                }
             }
         }
     }
 
     public void update() {
+    }
+
+    public int[][] getBrickMap() {
+        return brickMap;
+    }
+
+    public void setBrickStatus(int row, int col, int value){
+        if(value < 1 || value > 1){
+            value = 0;
+        }
+        brickMap[row][col] = value;
+    }
+
+    public Rectangle getBrickRectangle(int row, int col) {
+        return new Rectangle(col * brickWidth + HOR_PAD, row * brickHeight + VERT_PAD, brickWidth, brickHeight);
     }
 }
